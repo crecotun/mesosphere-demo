@@ -1,0 +1,22 @@
+{
+  "rulesDirectory": [
+    "tslint-plugin-prettier"
+  ],
+  "extends": [
+    "tslint-config-standard",
+    "tslint-config-prettier"
+  ],
+  "rules": {
+    "prettier": true,
+    "strict-type-predicates": false
+  },
+  "cliOptions": {
+    "exclude": [
+      "**/*.d.ts",
+      "**/*.spec.ts",
+      "**/*.spec.tsx",
+      "**/*.test.ts",
+      "**/*.test.tsx"
+    ]
+  }
+}

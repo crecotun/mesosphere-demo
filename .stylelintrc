@@ -1,0 +1,27 @@
+{
+  "extends": "stylelint-config-sass-guidelines",
+  "plugins": [
+    "stylelint-order"
+  ],
+  "rules": {
+    "selector-max-id": 0,
+    "selector-pseudo-element-case": "lower",
+
+    "max-empty-lines": 2,
+    "no-empty-source": true,
+    "no-eol-whitespace": true,
+    "no-extra-semicolons": true,
+    "no-invalid-double-slash-comments": true,
+    "selector-class-pattern": "^[a-z][a-zA-Z0-9]+$",
+    "max-nesting-depth": null,
+    "property-no-unknown": null,
+
+    "scss/at-import-partial-extension-blacklist": null,
+    "scss/at-rule-no-unknown": null,
+    "scss/selector-no-redundant-nesting-selector": null,
+    "selector-max-compound-selectors": 7,
+    "order/properties-alphabetical-order": null,
+    "length-zero-no-unit": null
+  },
+  ignoreFiles: ['**/*.tsx', '**/*.ts']
+}
