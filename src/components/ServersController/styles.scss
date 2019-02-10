@@ -1,0 +1,31 @@
+.container {
+  text-align: center;
+  padding: 50px 0;
+}
+
+.button {
+  @include reset-input;
+  display: inline-block;
+  margin: 0 10px;
+  color: #6b6b6b;
+  cursor: pointer;
+}
+
+.icon {
+  display: block;
+  width: 60px;
+  height: 60px;
+  font-size: 40px;
+  margin: 0 0 10px;
+  border-radius: 100%;
+  border: 2px solid #6b6b6b;
+  color: inherit;
+}
+
+.add {
+  color: #fff;
+
+  .icon {
+    border-color: #fff;
+  }
+}
