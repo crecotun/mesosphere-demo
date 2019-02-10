@@ -59,16 +59,63 @@ class Cluster {
     const destroyedServer: Server | undefined = this.servers.pop()
 
     if (destroyedServer) {
-      destroyedServer.applicationIds.forEach(applicationId => {
-        const server = this.getServerById(this.getCapableServerId)
-        if (server && this.canStartAnApp) {
-          server.applicationIds.push(applicationId)
-          return
-        }
-
-        this.removeApplicationById(applicationId)
-      })
+      this.allocateApplications(destroyedServer.applicationIds)
     }
+  }
+
+  @action
+  destroyServerById(id: string) {
+    const server = this.getServerById(id) as Server
+    const serverIndex = this.getServerIndexById(id)
+    this.servers.splice(serverIndex, 1)
+    if (server) {
+      this.allocateApplications(server.applicationIds)
+    }
+  }
+
+  getServerById(id: string): Server | null {
+    return this.servers.find((server: Server) => server.id === id) || null
+  }
+
+  @computed
+  get getCapableServerId(): string | null {
+    const sortedByRunnedAppsServers: Server[] = this.servers
+      .slice()
+      .sort(
+        (serverA: Server, serverB: Server) =>
+          serverA.applicationIds.length - serverB.applicationIds.length,
+      )
+
+    const firstCapableServer = sortedByRunnedAppsServers[0]
+
+    if (firstCapableServer && firstCapableServer.applicationIds.length < 2) {
+      return firstCapableServer.id as string
+    }
+
+    return null
+  }
+
+  @computed
+  get canStartAnApp(): boolean {
+    return (
+      Boolean(this.servers.length) &&
+      Boolean(
+        this.servers.find((server: Server) => server.applicationIds.length < 2),
+      )
+    )
+  }
+
+  @action
+  allocateApplications(applicationIds: string[]) {
+    applicationIds.forEach(applicationId => {
+      const server = this.getServerById(this.getCapableServerId)
+      if (server && this.canStartAnApp) {
+        server.applicationIds.push(applicationId)
+        return
+      }
+
+      this.removeApplicationById(applicationId)
+    })
   }
 
   @action
@@ -113,17 +160,6 @@ class Cluster {
     this.applications.splice(applicationIndex, 1)
   }
 
-  @action
-  destroyServerById(id: string) {
-    const serverIndex = this.getServerIndexById(id)
-
-    this.servers.splice(serverIndex, 1)
-  }
-
-  getServerById(id: string): Server | null {
-    return this.servers.find((server: Server) => server.id === id) || null
-  }
-
   getApplicationById(id: string): Application | null {
     return (
       this.applications.find(
@@ -146,34 +182,6 @@ class Cluster {
     for (let i = 0; i < INITIAL_SERVERS_AMOUNT; i++) {
       this.addServer()
     }
-  }
-
-  @computed
-  get getCapableServerId(): string | null {
-    const sortedByRunnedAppsServers: Server[] = this.servers
-      .slice()
-      .sort(
-        (serverA: Server, serverB: Server) =>
-          serverA.applicationIds.length - serverB.applicationIds.length,
-      )
-
-    const firstCapableServer = sortedByRunnedAppsServers[0]
-
-    if (firstCapableServer && firstCapableServer.applicationIds.length < 2) {
-      return firstCapableServer.id as string
-    }
-
-    return null
-  }
-
-  @computed
-  get canStartAnApp(): boolean {
-    return (
-      Boolean(this.servers.length) &&
-      Boolean(
-        this.servers.find((server: Server) => server.applicationIds.length < 2),
-      )
-    )
   }
 }
 
