@@ -1,6 +1,8 @@
 import * as uuid from 'uuid/v4'
 import { observable, action } from 'mobx'
-import Application from 'src/store/features/application'
+import Application, {
+  ApplicationInitialDataType,
+} from 'src/store/features/application'
 import Server, { ServerInitialDataType } from './server'
 import { INITIAL_SERVERS_AMOUNT } from 'src/constants'
 
@@ -8,20 +10,19 @@ type CluserInitialDataType = {
   id: string
   createdAt: string
   servers: ServerInitialDataType[]
+  applications: ApplicationInitialDataType[]
 }
 
 class Cluster {
-  id: string
-  createdAt: Date
+  id?: string
+  createdAt?: Date
 
   readonly servers = observable<Server>([])
   readonly applications = observable<Application>([])
 
   constructor(initialData?: CluserInitialDataType) {
     if (initialData) {
-      this.id = initialData.id
-      this.createdAt = new Date(initialData.createdAt)
-      this.addServers(initialData.servers)
+      this.rehydrate(initialData)
       return
     }
 
@@ -30,14 +31,14 @@ class Cluster {
     this.startup()
   }
 
-  startup() {
-    for (let i = 0; i < INITIAL_SERVERS_AMOUNT; i++) {
-      this.addServer()
-    }
-  }
-
-  addServers = (servers: ServerInitialDataType[]) => {
-    servers.forEach(this.addServer)
+  @action
+  rehydrate = (initialData: CluserInitialDataType) => {
+    this.id = initialData.id
+    this.createdAt = new Date(initialData.createdAt)
+    initialData.servers.forEach(server => this.servers.push(new Server(server)))
+    initialData.applications.forEach(application =>
+      this.applications.push(new Application(application)),
+    )
   }
 
   @action
@@ -60,6 +61,12 @@ class Cluster {
     }
   }
 
+  @action
+  addApplication = (application: ApplicationInitialDataType) => {
+    const newApplication = new Application(application)
+    this.applications.push(newApplication)
+  }
+
   destroyServerById(id: string) {
     const serverIndex = this.getServerIndexById(id)
 
@@ -72,6 +79,12 @@ class Cluster {
 
   getServerIndexById(id: string): number {
     return this.servers.findIndex((server: Server) => server.id === id)
+  }
+
+  startup() {
+    for (let i = 0; i < INITIAL_SERVERS_AMOUNT; i++) {
+      this.addServer()
+    }
   }
 }
 

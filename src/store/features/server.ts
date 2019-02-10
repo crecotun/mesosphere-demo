@@ -8,16 +8,13 @@ export type ServerInitialDataType = {
 }
 
 class Server {
-  id: string
-  createdAt: Date
+  id?: string
+  createdAt?: Date
   readonly applicationIds = observable<string>([])
 
   constructor(initialData?: ServerInitialDataType) {
     if (initialData) {
-      this.id = initialData.id
-      this.createdAt = new Date(initialData.createdAt)
-      this.addApplications(initialData.applicationIds)
-
+      this.rehydrate(initialData)
       return
     }
 
@@ -25,12 +22,19 @@ class Server {
     this.createdAt = new Date()
   }
 
-  addApplications(ids: string[]) {
+  @action
+  rehydrate(initialData: ServerInitialDataType) {
+    this.id = initialData.id
+    this.createdAt = new Date(initialData.createdAt)
+    initialData.applicationIds.forEach(id => this.applicationIds.push(id))
+  }
+
+  addApplications = (ids: string[]) => {
     ids.forEach(this.addAplication)
   }
 
   @action
-  addAplication(id: string) {
+  addAplication = (id: string) => {
     this.applicationIds.push(id)
   }
 }

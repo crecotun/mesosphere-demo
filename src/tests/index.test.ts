@@ -36,7 +36,9 @@ describe('Cluster', () => {
   test('destroy server by Id', () => {
     clusterStore.destroyServerById('server-2')
 
-    expect(clusterStore.servers.length).toBe(2)
+    expect(clusterStore.servers.length).toBe(
+      storeInitialData.cluster.servers.length - 1,
+    )
     expect(clusterStore.servers.find(server => server.id === 'server-2')).toBe(
       undefined,
     )
