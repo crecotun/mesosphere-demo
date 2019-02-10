@@ -10,7 +10,8 @@ module.exports = withTypescript(
     sassLoaderOptions: {
       data: `
         @import 'src/styles/mixins/index.scss';
-      `
+        @import 'src/styles/global/variables.scss';
+      `,
     },
   }),
 )

@@ -23,8 +23,8 @@ const ApplicationsController: React.FunctionComponent<
   addApplication,
 }) => {
   const className = `${styles.container} ${styles[applicationInfo.image]}`
-  const addButtonClass = `${styles.button} ${styles.removeButton}`
-  const removeButtonClass = `${styles.button} ${styles.addButton}`
+  const addButtonClass = `${styles.button} ${styles.addButton}`
+  const removeButtonClass = `${styles.button} ${styles.removeButton}`
 
   return (
     <div className={className}>

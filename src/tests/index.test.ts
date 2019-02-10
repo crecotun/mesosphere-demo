@@ -61,7 +61,7 @@ describe('Adding applications functionality', () => {
   })
 
   test('remove last added application', () => {
-    clusterStore.removeApplication()
+    clusterStore.removeApplication('spark')
 
     expect(clusterStore.getApplicationById('application-4')).toBe(null)
     expect(

@@ -3,6 +3,8 @@
   position: relative;
   height: 56px;
   line-height: 56px;
+  padding: 0 0 0 35px;
+  font-size: 14px;
 
   &::before {
     content: '';
@@ -10,14 +12,14 @@
     top: 0;
     left: 0;
     bottom: 0;
-    width: 3px;
+    width: 5px;
     background: #fff;
   }
 }
 
 .buttons {
   @include center-v;
-  right: 0;
+  right: -15px;
 }
 
 .button {
@@ -26,8 +28,62 @@
   cursor: pointer;
   width: 30px;
   height: 30px;
-  background: #ccc;
   margin: 0 0 0 10px;
   font-size: 20px;
   color: #fff;
+}
+
+.removeButton {
+  color: #333;
+  border: 2px solid #333;
+}
+
+.hadoop {
+  &::before {
+    background: #c31690;
+  }
+
+  .addButton {
+    background: $hadoop-gradient;
+  }
+}
+
+.rails {
+  &::before {
+    background: #140753;
+  }
+
+  .addButton {
+    background: $rails-gradient;
+  }
+}
+
+.chronos {
+  &::before {
+    background: #00274f;
+  }
+
+  .addButton {
+    background: $chronos-gradient;
+  }
+}
+
+.storm {
+  &::before {
+    background: #00da99;
+  }
+
+  .addButton {
+    background: $storm-gradient;
+  }
+}
+
+.spark {
+  &::before {
+    background: #33f400;
+  }
+
+  .addButton {
+    background: $spark-gradient;
+  }
 }

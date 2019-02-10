@@ -1,0 +1,15 @@
+.title {
+  display: block;
+  padding: 0 0 0 35px;
+  color: #5e5e5e;
+  font-size: 14px;
+  margin: 0 0 15px;
+}
+
+.applicationItem {
+  margin: 1px 0 0;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
