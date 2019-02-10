@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  height: 100%;
+  background: #000;
+}
+
+.sidebar {
+  flex: 0 0 320px;
+  background-color: #1e1e1e;
+}
+
+.canvas {
+  flex: 1;
+}

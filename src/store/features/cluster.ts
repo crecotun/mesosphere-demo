@@ -5,6 +5,7 @@ import Application, {
 } from 'src/store/features/application'
 import Server, { ServerInitialDataType } from './server'
 import { INITIAL_SERVERS_AMOUNT } from 'src/constants'
+import { ApplicationImage } from 'src/types'
 
 type CluserInitialDataType = {
   id: string
@@ -85,9 +86,18 @@ class Cluster {
   }
 
   @action
-  removeApplication = () => {
-    const removedApplication = this.applications.pop() as Application
+  removeApplication = (image: ApplicationImage) => {
+    const filteredByTypeApplications = this.applications.filter(
+      application => application.image === image,
+    )
+    const removedApplication =
+      filteredByTypeApplications[filteredByTypeApplications.length - 1]
 
+    if (!removedApplication) {
+      return
+    }
+
+    this.removeApplicationById(removedApplication.id)
     this.servers.forEach((server: Server) => {
       const indexOfApp = server.applicationIds.indexOf(removedApplication.id)
       if (indexOfApp > -1) {

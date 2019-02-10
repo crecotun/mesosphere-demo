@@ -1,0 +1,33 @@
+.container {
+  background: #141414;
+  position: relative;
+  height: 56px;
+  line-height: 56px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 3px;
+    background: #fff;
+  }
+}
+
+.buttons {
+  @include center-v;
+  right: 0;
+}
+
+.button {
+  @include reset-input;
+  border-radius: 100%;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  background: #ccc;
+  margin: 0 0 0 10px;
+  font-size: 20px;
+  color: #fff;
+}
