@@ -1,0 +1,39 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.initials {
+  font-size: 20px;
+  display: block;
+}
+
+.name {
+  display: block;
+  font-size: 14px;
+  margin: 10px 0 0;
+}
+
+.hadoop {
+  background: $hadoop-gradient;
+}
+
+.rails {
+  background: $rails-gradient;
+}
+
+.chronos {
+  background: $chronos-gradient;
+}
+
+.storm {
+  background: $storm-gradient;
+}
+
+.spark {
+  background: $spark-gradient;
+}

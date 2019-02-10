@@ -1,10 +1,11 @@
 import * as React from 'react'
 import { inject } from 'src/utils/storeInject'
-import Server from 'src/store/features/server'
-// import styles from './styles.scss'
+import ServerModel from 'src/store/features/server'
+import Server from './components/Server'
+import styles from './styles.scss'
 
 type ServerCanvasType = {
-  servers: Server[]
+  servers: ServerModel[]
 }
 
 const ServerCanvas: React.FunctionComponent<ServerCanvasType> = ({
@@ -13,13 +14,17 @@ const ServerCanvas: React.FunctionComponent<ServerCanvasType> = ({
   if (!servers) {
     return null
   }
-  const serversEl = servers.map(el => (
-    <div>
-      {el.id}
-      {el.applicationIds.toString()}
-    </div>
+  const serversEl = servers.map(server => (
+    <li key={server.id} className={styles.server}>
+      <Server id={server.id} />
+    </li>
   ))
-  return <div>{serversEl}</div>
+  return (
+    <div className={styles.container}>
+      <strong className={styles.title}>Server Canvas</strong>
+      <ul className={styles.servers}>{serversEl}</ul>
+    </div>
+  )
 }
 
 export default inject(
