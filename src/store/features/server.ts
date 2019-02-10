@@ -29,13 +29,13 @@ class Server {
     initialData.applicationIds.forEach(id => this.applicationIds.push(id))
   }
 
-  addApplications = (ids: string[]) => {
-    ids.forEach(this.addAplication)
-  }
-
   @action
   addAplication = (id: string) => {
     this.applicationIds.push(id)
+  }
+
+  addApplications = (ids: string[]) => {
+    ids.forEach(this.addAplication)
   }
 }
 

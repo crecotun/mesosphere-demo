@@ -10,7 +10,7 @@ beforeEach(() => {
   clusterStore = rootStore.cluster
 })
 
-describe('Cluster', () => {
+describe('Cluster base operations', () => {
   test('startup', () => {
     expect(clusterStore.servers.length).toBe(
       storeInitialData.cluster.servers.length,
@@ -48,4 +48,38 @@ describe('Cluster', () => {
     clusterStore.destroyServers()
     expect(clusterStore.servers.length).toBe(0)
   })
+})
+
+describe('Adding applications functionality', () => {
+  test('add application', () => {
+    clusterStore.addApplication({ id: 'application-11', image: 'rails' })
+    expect(
+      clusterStore
+        .getServerById('server-2')
+        .applicationIds.indexOf('application-11') > -1,
+    ).toBe(true)
+  })
+
+  test('remove last added application', () => {
+    clusterStore.removeApplication()
+
+    expect(clusterStore.getApplicationById('application-4')).toBe(null)
+    expect(
+      clusterStore
+        .getServerById('server-4')
+        .applicationIds.indexOf('application-4') === -1,
+    ).toBe(true)
+  })
+
+  test('try to add more than possible apps', () => {
+    clusterStore.addApplication({ id: 'application-5', image: 'rails' })
+    clusterStore.addApplication({ id: 'application-6', image: 'rails' })
+    clusterStore.addApplication({ id: 'application-7', image: 'rails' })
+    clusterStore.addApplication({ id: 'application-8', image: 'rails' })
+    clusterStore.addApplication({ id: 'application-9', image: 'rails' })
+
+    expect(clusterStore.getApplicationById('application-9')).toBe(null)
+  })
+
+  // when removing a server and it's not possible to add an app to other server, destroy the app
 })

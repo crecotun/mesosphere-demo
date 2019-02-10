@@ -26,22 +26,22 @@ export const storeInitialData = {
     ],
     servers: [
       {
-        id: 'sever-1',
+        id: 'server-1',
         createdAt: 'Sun Feb 10 2019 18:39:55 GMT+0100',
         applicationIds: ['application-1'],
       },
       {
-        id: 'sever-2',
+        id: 'server-2',
         createdAt: 'Sun Feb 10 2019 18:39:56 GMT+0100',
         applicationIds: [],
       },
       {
-        id: 'sever-3',
+        id: 'server-3',
         createdAt: 'Sun Feb 10 2019 18:39:57 GMT+0100',
         applicationIds: ['application-2', 'application-3'],
       },
       {
-        id: 'sever-4',
+        id: 'server-4',
         createdAt: 'Sun Feb 10 2019 18:39:58 GMT+0100',
         applicationIds: ['application-4'],
       },
