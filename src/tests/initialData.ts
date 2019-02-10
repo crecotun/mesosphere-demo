@@ -16,7 +16,7 @@ export const storeInitialData = {
       {
         id: 'application-3',
         createdAt: 'Sun Feb 10 2019 18:40:03 GMT+0100',
-        image: 'rails',
+        image: 'chronos',
       },
       {
         id: 'application-4',

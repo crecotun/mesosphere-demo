@@ -5,6 +5,12 @@
   text-align: center;
   align-items: center;
   justify-content: center;
+  border-radius: 3px;
+  margin: 2px 0 0;
+
+  &:first-child {
+    margin: 0;
+  }
 }
 
 .initials {
