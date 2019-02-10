@@ -16,12 +16,7 @@ type ApplicationsControllerType = {
 
 const ApplicationsController: React.FunctionComponent<
   ApplicationsControllerType
-> = ({
-  applicationInfo,
-  canAddApplication,
-  removeApplication,
-  addApplication,
-}) => {
+> = ({ applicationInfo, removeApplication, addApplication }) => {
   const className = `${styles.container} ${styles[applicationInfo.image]}`
   const addButtonClass = `${styles.button} ${styles.addButton}`
   const removeButtonClass = `${styles.button} ${styles.removeButton}`

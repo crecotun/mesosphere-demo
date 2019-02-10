@@ -17,7 +17,6 @@ const Application: React.FunctionComponent<ApplicationType> = ({
   applicationInfo,
   application,
 }) => {
-  console.log(applicationInfo)
   const containerClass = `${styles.container} ${styles[application.image]}`
   return (
     <div className={containerClass}>

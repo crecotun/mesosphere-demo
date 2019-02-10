@@ -6,4 +6,24 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  position: relative;
+  cursor: pointer;
+
+  &::before {
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    content: 'Destroy';
+    background: rgba(#000, 0.7);
+    line-height: 142px;
+    text-align: center;
+  }
+
+  &:hover {
+    &::before {
+      opacity: 1;
+    }
+  }
 }

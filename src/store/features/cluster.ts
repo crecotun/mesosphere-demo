@@ -168,8 +168,11 @@ class Cluster {
 
   @computed
   get canStartAnApp(): boolean {
-    return Boolean(
-      this.servers.find((server: Server) => server.applicationIds.length < 2),
+    return (
+      Boolean(this.servers.length) &&
+      Boolean(
+        this.servers.find((server: Server) => server.applicationIds.length < 2),
+      )
     )
   }
 }
