@@ -50,7 +50,7 @@ describe('Cluster base operations', () => {
   })
 })
 
-describe('Adding applications functionality', () => {
+describe('Applications functionality', () => {
   test('add application', () => {
     clusterStore.addApplication({ id: 'application-11', image: 'rails' })
     expect(
