@@ -1,14 +1,19 @@
 import { useStaticRendering } from 'mobx-react'
-import CounterStore from './features/counter'
+import Cluster from './features/cluster'
 
 const isServer = typeof window === 'undefined'
 useStaticRendering(isServer)
 
 export class RootStore {
-  public counter: CounterStore
+  public cluster: Cluster
 
-  constructor() {
-    this.counter = new CounterStore()
+  constructor(initialData?: any) {
+    if (initialData) {
+      this.cluster = new Cluster(initialData.cluster)
+      return
+    }
+
+    this.cluster = new Cluster()
   }
 }
 
@@ -21,6 +26,7 @@ export function initializeStore() {
   }
   if (store === null) {
     store = new RootStore()
+    window['store'] = store
   }
   return store
 }
