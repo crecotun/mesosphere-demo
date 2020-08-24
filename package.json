@@ -37,7 +37,7 @@
     "@zeit/next-typescript": "^1.1.1",
     "mobx": "^5.9.0",
     "mobx-react": "^5.4.3",
-    "next": "^7.0.2",
+    "next": "^9.3.2",
     "node-sass": "^4.11.0",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
