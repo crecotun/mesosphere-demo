@@ -5,6 +5,25 @@
 2. Or install application and run a server locally:
   1. `npm install`
   2. `npm run dev`
+  
+## Requirements
+### Interactions
+
+If interaction details are missing, use your best judgement and make a note to explain it during the follow up.
+
+- Clicking “Add Server” should create a new server and a new gray block in the Server Canvas.
+- Clicking “Destroy” should remove the last server and its gray block from the Server Canvas.
+- Clicking “+” for one of the Available Apps should start an instance of that app in the cluster.
+- Clicking “-” for one of the Available Apps should kill the newest instance of that app in the cluster.
+
+### Clicking “+” on an App
+
+- Each server can run a maximum of two apps at once.
+- When a new app is launched, it should be started following this algorithm:
+    1. Run on the first server running 0 apps.
+    2. If all servers are running at least 1 app, the new app should be started on the first server running only 1 app.
+    3. If all servers are running two apps, the app should not be started.
+- When a server is destroyed, each app running on it should be restarted elsewhere in the cluster following the algorithm above. If there is no capacity for the apps, they should be killed.
 
 ## Tech Stack
 1. React
